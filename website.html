@@ -12,7 +12,16 @@
   </script>
 
   <script>
-    // New code goes here
+    $(function() { // jQuery onload handler
+      var melbourne = new google.maps.LatLng(-37.813611, 144.963056);
+      var mapOptions = {
+        zoom:      12,
+        center:    melbourne,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+    }
+
+    var map = new google.maps.Map($("#map_canvas")[0], mapOptions);
+});
   </script>
 
 </head>
