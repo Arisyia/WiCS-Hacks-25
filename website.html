@@ -21,6 +21,18 @@
     }
 
     var map = new google.maps.Map($("#map_canvas")[0], mapOptions);
+    var marker = new google.maps.Marker({
+      position: new google.maps.LatLng(-37.818078, 144.966811),
+      map:      map,
+      title:    'Flinders St Station'
+    });
+    var marker = new google.maps.Marker({
+  position: new google.maps.LatLng(-37.818078, 144.966811),
+  map:      map,
+  title:    'Flinders St Station',
+  icon:     'http://google-maps-icons.googlecode.com/files/train.png'
+});
+marker.setAnimation(google.maps.Animation.BOUNCE); // Also try DROP
 });
   </script>
 
