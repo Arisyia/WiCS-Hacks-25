@@ -1,129 +1,99 @@
-import React, { useEffect, useState } from 'react';
-import L from 'leaflet';  // Leaflet.js for map handling
-import 'leaflet/dist/leaflet.css';  // Leaflet CSS for styling
-import 'leaflet.markercluster/dist/leaflet.markercluster.css';  // Marker clustering styles
-import 'leaflet.markercluster/dist/leaflet.markercluster.js';  // Marker clustering logic
-import ReactLeafletSearch from 'react-leaflet-search';
+import React, { useEffect, useRef, useState } from "react";
+import L from "leaflet";
+import "leaflet/dist/leaflet.css";
+import "./MapStyles.css"; // Custom styles
 
-const App = () => {
-  const [iconUrl, setIconUrl] = useState(null);  // State to store custom icon URL
-  const [currentLocation, setCurrentLocation] = useState(null);  // State to store user location
+const LeafletMap = () => {
+  const mapRef = useRef(null);
+  const [map, setMap] = useState(null);
 
   useEffect(() => {
-    // Initialize map after component mounts
-    const map = L.map('map').setView([30.2849, -97.7341], 15);  // Coordinates for UT Austin
+    if (!mapRef.current) return;
 
-    // Add the OpenStreetMap tile layer
-    const osmLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-    }).addTo(map);
+    const leafletMap = L.map(mapRef.current).setView([30.2851, -97.7335], 15);
+    setMap(leafletMap);
 
-    // Satellite view tile layer (used for layer control)
-    const satelliteLayer = L.tileLayer('https://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
-      subdomains: ['mt0', 'mt1', 'mt2', 'mt3'],
-    });
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      attribution: '&copy; <a href=\"https://www.openstreetmap.org/copyright\">OpenStreetMap</a> contributors'
+    }).addTo(leafletMap);
 
-    // Terrain view tile layer (used for layer control)
-    const terrainLayer = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png');
-
-    // Add a marker cluster group to cluster nearby markers
-    const markers = L.markerClusterGroup();
-
-    // Example of adding markers with popups for buildings
-    const buildings = [
-      { name: 'Jester Center', coords: [30.2849, -97.7341], description: 'A large residence hall and student services center.', category: 'Dormitory' },
-      { name: 'UT Tower', coords: [30.2850, -97.7333], description: 'The iconic tower of the University of Texas.', category: 'Landmark' },
-      { name: 'LBJ Library', coords: [30.2852, -97.7357], description: 'Library and center for historical research.', category: 'Library' },
-      { name: 'Perry-Castañeda Library (PCL)', coords: [30.2843, -97.7337], description: 'Main library for undergraduate students.', category: 'Library' },
-      { name: 'Blanton Museum of Art', coords: [30.2863, -97.7385], description: 'A museum of contemporary and modern art.', category: 'Museum' },
-      { name: 'Union Building', coords: [30.2840, -97.7360], description: 'Student union with dining and meeting areas.', category: 'Building' }
+    const locations = [
+      {
+        coords: [30.2851, -97.7335],
+        name: "University of Texas at Austin",
+        img: "https://nscs.org/wp-content/uploads/2024/05/University_of_Texas_at_Austin_logo.svg.png",
+        desc: "Hook 'em Horns!",
+      },
+      {
+        coords: [30.2861, -97.7394],
+        name: "UT Tower",
+        img: "https://www.shutterstock.com/image-photo/austin-texas-usa-april-11-260nw-1953863413.jpg",
+        desc: "Iconic tower of UT Austin.",
+      },
+      {
+        coords: [30.2831, -97.7326],
+        name: "DKR-Texas Memorial Stadium",
+        img: "https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,g_xy_center,h_415,q_75,w_623,x_662,y_427/v1/clients/austin/DKR_Stadium_at_UT_Austin_Credit_alccharlo_Instagram_Exp_Aug_2026_2388df20-d9b3-4c7f-9a11-1a2ae597e7ce.jpg",
+        desc: "Home of Texas Longhorns Football.",
+      },
     ];
 
-    // Add markers for each building to the marker cluster group
-    buildings.forEach(building => {
-      const { name, coords, description, category } = building;
-      const marker = L.marker(coords).bindPopup(`<b>${name}</b><br>${description}<br>Category: ${category}`);
-      markers.addLayer(marker);
+    locations.forEach(({ coords, name, img, desc }) => {
+      const googleStreetViewURL = `https://www.google.com/maps?q=&layer=c&cbll=${coords[0]},${coords[1]}`;
+
+      const marker = L.marker(coords).addTo(leafletMap)
+        .bindPopup(`
+          <div class="wild-west-popup">
+            <h3>${name}</h3>
+            <img src="${img}" width="150" />
+            <p>${desc}</p>
+            <a href="${googleStreetViewURL}" target="_blank" style="color: #BF5700; font-weight: bold; text-decoration: none;">
+              🔍 View in Street View
+            </a>
+          </div>
+        `);
+      marker.bindTooltip(name, { permanent: true, direction: "top", className: "wild-west-label" });
     });
 
-    // Add the marker cluster group to the map
-    map.addLayer(markers);
-
-    // Add layer control for switching between tile layers
-    const baseLayers = {
-      'OpenStreetMap': osmLayer,
-      'Satellite': satelliteLayer,
-      'Terrain': terrainLayer,
-    };
-    const overlays = {
-      'Buildings': markers,
-    };
-    L.control.layers(baseLayers, overlays).addTo(map);
-
-    // Add search functionality
-    new ReactLeafletSearch({
-      position: 'topright',
-      layer: markers,
-      initial: false,
-      zoom: 15,
-    }).addTo(map);
-
-    // Get the user's current location and set a marker
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(position => {
-        const userCoords = [position.coords.latitude, position.coords.longitude];
-        setCurrentLocation(userCoords);
-
-        const userLocationMarker = L.marker(userCoords, {
-          icon: L.icon({
-            iconUrl: iconUrl || 'https://cdn-icons-png.flaticon.com/512/149/149071.png',  // Default user location icon
-            iconSize: [40, 40],
-            iconAnchor: [20, 40],
-            popupAnchor: [0, -40],
-          }),
-        }).addTo(map);
-        userLocationMarker.bindPopup('<b>Your Location</b><br>This is where you are currently.');
-        map.setView(userCoords, 15);
-      });
-    }
-
-    // Cleanup: Remove map instance when the component unmounts
     return () => {
-      map.remove();
+      leafletMap.remove();
     };
-  }, [iconUrl]);
+  }, []);
 
-  return (
-    <div>
-      <div id="map" style={{ height: '100vh', width: '100%' }}></div>
+  useEffect(() => {
+    if (!map) return;
 
-      {/* Optional Title and Description */}
-      <div style={{ position: 'absolute', top: 10, left: 10, zIndex: 1000, fontSize: '30px', fontWeight: 'bold', color: 'white' }}>
-        UT Austin Interactive Map
-      </div>
-      <div style={{ position: 'absolute', top: 50, left: 10, zIndex: 1000, fontSize: '16px', color: 'white', maxWidth: '300px' }}>
-        Click on the markers to explore different buildings on campus.
-      </div>
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const { latitude, longitude } = position.coords;
 
-      {/* File input for uploading custom icon */}
-      <input
-        type="file"
-        onChange={(e) => {
-          const file = e.target.files[0];
-          if (file) {
-            const reader = new FileReader();
-            reader.onloadend = () => setIconUrl(reader.result);  // Set the uploaded image as a Data URL
-            reader.readAsDataURL(file);  // Converts the image file into a data URL
-          }
-        }}
-        style={{ position: 'absolute', top: 100, left: 10, zIndex: 1000 }}
-      />
-      <p style={{ position: 'absolute', top: 140, left: 10, zIndex: 1000, color: 'white' }}>
-        Upload your custom icon for the current location marker.
-      </p>
-    </div>
-  );
+          const cowboyHatIcon = L.icon({
+            iconUrl: "https://png.pngtree.com/png-clipart/20220806/ourmid/pngtree-cartoon-cowboy-hat-png-image_6101832.png", 
+            iconSize: [50, 50],
+            iconAnchor: [25, 50],
+            popupAnchor: [0, -50]
+          });
+
+          const streetViewURL = `https://www.google.com/maps?q=&layer=c&cbll=${latitude},${longitude}`;
+
+          L.marker([latitude, longitude], { icon: cowboyHatIcon }).addTo(map)
+            .bindPopup(`<h3>Your Location</h3><p>Howdy, partner!</p>
+              <a href="${streetViewURL}" target="_blank" style="color: #BF5700; font-weight: bold; text-decoration: none;">
+                🔍 View Your Street View
+              </a>`)
+            .openPopup();
+
+          map.setView([latitude, longitude], 15);
+        },
+        (error) => {
+          console.error("Geolocation error:", error);
+        }
+      );
+    }
+  }, [map]);
+
+  return <div ref={mapRef} style={{ width: "100%", height: "500px" }} />;
 };
 
-export default App;
-
+export default LeafletMap;

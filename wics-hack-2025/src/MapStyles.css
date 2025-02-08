@@ -1,0 +1,35 @@
+@import url('https://fonts.googleapis.com/css2?family=Special+Elite&display=swap');
+
+.wild-west-label {
+  font-family: 'Special Elite', serif; /* Gives an old-west, typewriter-style look */
+  background: #BF5700; /* UT Austin burnt orange */
+  color: white;
+  padding: 5px 10px;
+  border-radius: 8px;
+  border: 2px solid black;
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.wild-west-popup {
+  font-family: 'Special Elite', serif;
+  color: #4A2D13; /* Dark brown */
+  background: rgba(255, 245, 230, 0.9); /* Aged paper effect */
+  padding: 10px;
+  border: 3px solid #8B4513; /* Saddle brown */
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+  text-align: center;
+}
+
+.wild-west-popup img {
+  border: 2px solid #8B4513;
+  border-radius: 5px;
+  margin-top: 5px;
+}
+
+.wild-west-popup h3 {
+  font-size: 18px;
+  font-weight: bold;
+  text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.3);
+}
