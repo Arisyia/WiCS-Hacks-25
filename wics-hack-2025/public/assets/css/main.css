@@ -6,6 +6,13 @@
   src: url(Calvousdemo-vm2qy.otf);
 }
 
+/* Extra formatting */
+.map-border {
+    border: 20px dashed #00008B;
+    border-radius: 15px;
+    padding: 30px;
+}
+
 /*
 	Photon by HTML5 UP
 	html5up.net | @ajlkn
