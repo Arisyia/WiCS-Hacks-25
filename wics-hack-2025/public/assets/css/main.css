@@ -13,6 +13,166 @@
     padding: 30px;
 }
 
+.posts {
+    padding: 2.5rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.post-title {
+    color: #a5cefb;
+    font-weight: bold;
+    text-align: center !important;
+}
+
+header > .date {
+    display: block;
+    font-size: 1rem;
+    height: 2;
+    margin: 0 0 1rem 0;
+    position: relative;
+    text-align: center !important;
+}
+
+.posts > article .image {
+    max-width: 25rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Pagination */
+
+.pagination {
+    display: -moz-inline-flex;
+    display: -webkit-inline-flex;
+    display: -ms-inline-flex;
+    display: inline-flex;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    cursor: default;
+    list-style: none;
+    margin: 0 0 2rem 2px;
+    padding: 0;
+}
+
+    .pagination a, .pagination span {
+        -moz-transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out, color 0.2s ease-in-out;
+        -webkit-transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out, color 0.2s ease-in-out;
+        -ms-transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out, color 0.2s ease-in-out;
+        transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out, color 0.2s ease-in-out;
+        border: solid 2px;
+        display: inline-block;
+        /* font-family: "Source Sans Pro", Helvetica, sans-serif; */
+        font-size: 0.8rem;
+        font-weight: 900;
+        height: 3rem;
+        letter-spacing: 0.075em;
+        line-height: calc(3rem - 4px);
+        margin-left: -2px;
+        min-width: 3rem;
+        position: relative;
+        text-align: center;
+        text-decoration: none;
+        text-transform: uppercase;
+    }
+
+    .pagination .next, .pagination .previous {
+        text-decoration: none;
+        padding: 0 1.75rem;
+    }
+
+        .pagination .next:before, .pagination .previous:before {
+            -moz-osx-font-smoothing: grayscale;
+            -webkit-font-smoothing: antialiased;
+            display: inline-block;
+            font-style: normal;
+            font-variant: normal;
+            text-rendering: auto;
+            line-height: 1;
+            text-transform: none !important;
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 900;
+        }
+
+        .pagination .next:before, .pagination .previous:before {
+            display: inline-block;
+            color: inherit !important;
+            line-height: inherit;
+        }
+
+    .pagination .previous:before {
+        content: '\f104';
+        margin-right: 0.9375em;
+    }
+
+    .pagination .next:before {
+        content: '\f105';
+        float: right;
+        margin-left: 0.9375em;
+    }
+
+    @media screen and (max-width: 980px) {
+
+        .pagination a, .pagination span {
+            font-size: 0.9rem;
+        }
+
+    }
+
+    @media screen and (max-width: 480px) {
+
+        .pagination .page, .pagination .extra {
+            display: none;
+        }
+
+    }
+
+.pagination a, .pagination span {
+    border-color: #eeeeee;
+}
+
+.pagination a {
+    color: #bf5700 !important;
+}
+
+    .pagination a:hover {
+        background-color: rgba(144, 144, 144, 0.075);
+        /* color: #18bfef !important; */
+        /* border-color: #18bfef; */
+        border-color: rgba(144, 144, 144, 0.075);
+        z-index: 1;
+    }
+
+        .pagination a:hover + a,
+        .pagination a:hover + span {
+            border-left-color: rgba(144, 144, 144, 0.075);
+        }
+
+    .pagination a.active {
+        background-color: #eeeeee;
+    }
+
+.pagination span {
+    color: #eeeeee;
+}
+
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    max-width: 300px;
+    margin: auto;
+    text-align: center;
+}
+
+.card-title {
+    font-family: Wanted;
+}
+
+.card-button {
+    padding-bottom: 5px;
+}
+
 /*
 	Photon by HTML5 UP
 	html5up.net | @ajlkn
@@ -2364,7 +2524,103 @@ input, select, textarea {
 
 /* Image */
 
-	.image {
+.image {
+    border: 0;
+    display: inline-block;
+    position: relative;
+    /* padding: 10%; */
+    padding: 1%;
+    width: 100%;
+    height: auto;
+    /* max-width: 100%; */
+    object-fit: cover;
+}
+
+    .image img {
+        display: block;
+    }
+
+    .image.left, .image.right {
+        max-width: 40%;
+    }
+
+        .image.left img, .image.right img {
+            width: 100%;
+        }
+
+    .image.left {
+        float: left;
+        margin: 0 2rem 2rem 0;
+        top: 0.75rem;
+    }
+
+    .image.right {
+        float: right;
+        margin: 0 0 2rem 2rem;
+        top: 0.75rem;
+    }
+
+    .image.fit {
+        display: block;
+        margin: 2.5rem 0;
+        width: 100%;
+    }
+
+        .image.fit:first-child {
+            margin-top: 0;
+        }
+
+        .image.fit img {
+            width: 100%;
+        }
+
+    .image.main {
+        display: block;
+        margin: 4rem 0;
+        width: 100%;
+    }
+
+        .image.main:first-child {
+            margin-top: 0;
+        }
+
+        .image.main img {
+            width: 100%;
+        }
+
+    @media screen and (max-width: 736px) {
+
+        .image.fit {
+            margin: 2rem 0;
+        }
+
+        .image.main {
+            margin: 2rem 0;
+        }
+
+    }
+
+a.image {
+    overflow: hidden;
+}
+
+    a.image img {
+        -moz-transition: -moz-transform 0.2s ease-out;
+        -webkit-transition: -webkit-transform 0.2s ease-out;
+        -ms-transition: -ms-transform 0.2s ease-out;
+        transition: transform 0.2s ease-out;
+    }
+
+    a.image:hover img {
+        -moz-transform: scale(1.05);
+        -webkit-transform: scale(1.05);
+        -ms-transform: scale(1.05);
+        transform: scale(1.05);
+    }
+       
+/* Image */
+
+	/* .image {
 		border-radius: 4px;
 		border: 0;
 		display: inline-block;
@@ -2404,7 +2660,7 @@ input, select, textarea {
 
 			.image.fit img {
 				width: 100%;
-			}
+			} */
 
 /* List */
 
