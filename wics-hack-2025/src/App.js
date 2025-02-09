@@ -18,14 +18,14 @@ const LeafletMap = () => {
     }).addTo(leafletMap);
 
     const locations = [
-      { coords: [30.2851, -97.7335], name: "University of Texas at Austin", img: "https://nscs.org/wp-content/uploads/2024/05/University_of_Texas_at_Austin_logo.svg.png", desc: "Hook 'em Horns!" },
-      { coords: [30.2861, -97.7394], name: "UT Tower", img: "https://upload.wikimedia.org/wikipedia/commons/4/4d/UT_Tower.jpg", desc: "Iconic tower of UT Austin." },
-      { coords: [30.2831, -97.7326], name: "DKR-Texas Memorial Stadium", img: "https://upload.wikimedia.org/wikipedia/commons/6/68/DKR_Texas_Memorial_Stadium.jpg", desc: "Home of Texas Longhorns Football." },
-      { coords: [30.2811, -97.7348], name: "Jester Center", img: "https://upload.wikimedia.org/wikipedia/commons/3/3f/JesterCenter.jpg", desc: "Largest residence hall on campus." },
-      { coords: [30.2838, -97.7322], name: "Perry-Castañeda Library", img: "https://upload.wikimedia.org/wikipedia/commons/8/8a/Perry-Casta%C3%B1eda_Library.jpg", desc: "Main library on campus." },
-      { coords: [30.2865, -97.7350], name: "Gregory Gym", img: "https://upload.wikimedia.org/wikipedia/commons/6/60/GregoryGymUT.jpg", desc: "Recreation center for students." },
-      { coords: [30.2843, -97.7276], name: "LBJ Presidential Library", img: "https://upload.wikimedia.org/wikipedia/commons/4/4c/LBJ_Library.jpg", desc: "Library and museum dedicated to Lyndon B. Johnson." },
-      { coords: [30.2835, -97.7371], name: "McCombs School of Business", img: "https://upload.wikimedia.org/wikipedia/commons/d/dc/McCombs_Business_School.jpg", desc: "Business school at UT Austin." },
+      { coords: [30.2851, -97.7335], name: "University of Texas at Austin", img: "https://upload.wikimedia.org/wikipedia/en/thumb/e/e1/University_of_Texas_at_Austin_seal.svg/1200px-University_of_Texas_at_Austin_seal.svg.png", desc: "Hook 'em Horns!" },
+      { coords: [30.2861, -97.7394], name: "UT Tower", img: "https://guidetoaustinarchitecture.com/wp-content/uploads/2023/06/UT-Tower-05-Bud-Franck.jpg", desc: "Iconic tower of UT Austin." },
+      { coords: [30.2831, -97.7326], name: "DKR-Texas Memorial Stadium", img: "https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,g_xy_center,h_415,q_75,w_623,x_662,y_427/v1/clients/austin/DKR_Stadium_at_UT_Austin_Credit_alccharlo_Instagram_Exp_Aug_2026_2388df20-d9b3-4c7f-9a11-1a2ae597e7ce.jpg", desc: "Home of Texas Longhorns Football." },
+      { coords: [30.2811, -97.7348], name: "Jester Center", img: "https://upload.wikimedia.org/wikipedia/commons/f/f3/Jester_Dormitory_on_the_campus_of_the_University_of_Texas_at_Austin_%2819_03_2003%29.jpg", desc: "Largest residence hall on campus." },
+      { coords: [30.2838, -97.7322], name: "Perry-Castañeda Library", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQd4y3e6TTtdwa6g1BUUN5sREwxfbvxImwZMg&s", desc: "Main library on campus." },
+      { coords: [30.2865, -97.7350], name: "Gregory Gym", img: "https://www.utrecsports.org/public/upload/images/promos/_generic/JWG_1073-2.jpg", desc: "Recreation center for students." },
+      { coords: [30.2843, -97.7276], name: "LBJ Presidential Library", img: "https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,h_676,q_75,w_1000/v1/clients/austin/LBJ_Library_Exterior_photo_by_Jay_Godwin_be5774c3-7934-4fdf-b635-8fb1a7363df6.jpg", desc: "Library and museum dedicated to Lyndon B. Johnson." },
+      { coords: [30.2835, -97.7371], name: "McCombs School of Business", img: "https://giving.utexas.edu/wp-content/uploads/2020/10/McCombs1-1.jpg", desc: "Business school at UT Austin." },
       { coords: [30.2862, -97.7405], name: "Texas Union", img: "https://upload.wikimedia.org/wikipedia/commons/9/9a/TexasUnion.jpg", desc: "Student activity center." },
       { coords: [30.2882, -97.7359], name: "RLM Hall", img: "https://upload.wikimedia.org/wikipedia/commons/7/75/RLM_Hall_UT.jpg", desc: "Department of Mathematics and Astronomy." },
       { coords: [30.2802, -97.7321], name: "Frank Erwin Center", img: "https://upload.wikimedia.org/wikipedia/commons/5/5e/FrankErwinCenter.jpg", desc: "Former basketball arena for the Longhorns." },
